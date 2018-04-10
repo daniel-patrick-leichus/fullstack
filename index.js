@@ -18,6 +18,10 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
+app.get('/api/count', (req, res, next) => {
+  req.session.views = (req.session.views || 0) + 1;
+  res.send(req.session.views + ' views');
+});
 
 require('./routes/authRoutes')(app);
 
